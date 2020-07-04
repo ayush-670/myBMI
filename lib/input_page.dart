@@ -1,4 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import './cont.dart';
+import './icon.dart';
+
+const activecol = Color(0xFF1D1E33);
+const btmHeight = 80.0;
 
 class InputPage extends StatefulWidget {
   @override
@@ -20,38 +26,48 @@ class _InputPageState extends State<InputPage> {
             Expanded(
               child: Row(
                 children: <Widget>[
-                  Cont(colour: Color(0xFF1D1E33)),
-                  Cont(colour: Color(0xFF1D1E33))
+                  Expanded(
+                    child: GestureDetector(
+                      onTap: (){
+                        setState(() {
+                          
+                          
+                        });
+                      },
+                      child: 
+                      Cont(
+                        colour: activecol,
+                        cardChild: IconChild(FontAwesomeIcons.male, 'MALE'),
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                    child: GestureDetector(
+                      child: Cont(
+                        colour: activecol,
+                        cardChild: IconChild(FontAwesomeIcons.female, 'FEMALE'),
+                      ),
+                    ),
+                  ),
                 ],
               ),
             ),
-            Cont(colour: Color(0xFF1D1E33)),
+            Cont(colour: activecol),
             Expanded(
               child: Row(
                 children: <Widget>[
-                  Cont(colour: Color(0xFF1D1E33)),
-                  Cont(colour: Color(0xFF1D1E33)),
+                  Cont(colour: activecol),
+                  Cont(colour: activecol),
                 ],
               ),
             ),
+            Container(
+              color: Colors.teal, //Color(0xFFEB1555),
+              margin: EdgeInsets.only(top: 10.0),
+              width: double.infinity,
+              height: btmHeight,
+            ),
           ],
-        ),
-      ),
-    );
-  }
-}
-
-class Cont extends StatelessWidget {
- final Color colour;
-  Cont({@required this.colour});
-  @override
-  Widget build(BuildContext context) {
-    return Expanded(
-      child: Container(
-        margin: EdgeInsets.all(15.0),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(12.0),
-          color: colour,
         ),
       ),
     );
