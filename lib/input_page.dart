@@ -4,6 +4,7 @@ import './cont.dart';
 import './icon.dart';
 
 const activecol = Color(0xFF1D1E33);
+const inactivecol = Color(0xFF1111328);
 const btmHeight = 80.0;
 
 class InputPage extends StatefulWidget {
@@ -12,6 +13,30 @@ class InputPage extends StatefulWidget {
 }
 
 class _InputPageState extends State<InputPage> {
+  Color maleCardColour = inactivecol;
+  Color femaleCardColour = inactivecol;
+
+  void updateCol(String code) {
+    if (code == '1') {
+      if (maleCardColour == inactivecol) {
+        setState(() {
+          maleCardColour = activecol;
+          femaleCardColour = inactivecol;
+        });
+      } else {
+        maleCardColour = inactivecol;
+      }
+    }
+    if (code == '2') {
+      if (femaleCardColour == inactivecol) {
+        femaleCardColour = activecol;
+        maleCardColour = inactivecol;
+      } else {
+        femaleCardColour = inactivecol;
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -28,24 +53,30 @@ class _InputPageState extends State<InputPage> {
                 children: <Widget>[
                   Expanded(
                     child: GestureDetector(
-                      onTap: (){
+                      onTap: () {
                         setState(() {
-                          
-                          
+                          updateCol('1');
                         });
                       },
-                      child: 
-                      Cont(
-                        colour: activecol,
+                      child: Cont(
+                        colour: maleCardColour,
                         cardChild: IconChild(FontAwesomeIcons.male, 'MALE'),
                       ),
                     ),
                   ),
                   Expanded(
                     child: GestureDetector(
-                      child: Cont(
-                        colour: activecol,
-                        cardChild: IconChild(FontAwesomeIcons.female, 'FEMALE'),
+                      onTap: () {
+                        setState(() {
+                          updateCol('2');
+                        });
+                      },
+                      child: GestureDetector(
+                        child: Cont(
+                          colour: femaleCardColour,
+                          cardChild:
+                              IconChild(FontAwesomeIcons.female, 'FEMALE'),
+                        ),
                       ),
                     ),
                   ),
